@@ -1,6 +1,8 @@
 package com.acellam.lms.loans.loan;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +33,8 @@ public class LoanModel extends BaseModel {
 
     private int amount;
 
-    private String status; // REQUESTED, APPROVED, FAILED, COMPLETED
+    @Enumerated(EnumType.STRING)
+    private LoanStatus status; // REQUESTED, APPROVED, FAILED, COMPLETED
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
