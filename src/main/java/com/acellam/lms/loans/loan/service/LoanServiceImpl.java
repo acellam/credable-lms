@@ -73,7 +73,14 @@ public class LoanServiceImpl implements LoanService {
 
     private CustomerResponseDto getCustomerResponseDto(String customerNumber) {
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
-        CustomerResponseDto customerResponseDto = customerService.getCustomer(customerSubscriptionDto);
+        CustomerResponseDto customerResponseDto;
+
+        try {
+            customerResponseDto = customerService.getCustomer(customerSubscriptionDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve customer from customer service");
+        }
+
         // check if customer exists
         if (customerResponseDto == null) {
             throw new RuntimeException("Customer not found");
