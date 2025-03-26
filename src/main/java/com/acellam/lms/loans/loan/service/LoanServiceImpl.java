@@ -9,6 +9,7 @@ import com.acellam.lms.loans.loan.LoanMapper;
 import com.acellam.lms.loans.loan.LoanModel;
 import com.acellam.lms.loans.loan.LoanRepository;
 import com.acellam.lms.loans.loan.LoanStatus;
+import com.acellam.lms.loans.loan.dtos.LoanCheckStatusDto;
 import com.acellam.lms.loans.loan.dtos.LoanClientRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
@@ -29,15 +30,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     public LoanResponseDto createLoan(LoanClientRequestDto loanClientRequest) {
-        // check if customer exists
-        CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(
-                loanClientRequest.customerNumber());
-
-        CustomerResponseDto customerResponseDto = customerService.getCustomer(customerSubscriptionDto);
-
-        if (customerResponseDto == null) {
-            throw new RuntimeException("Customer not found");
-        }
+        CustomerResponseDto customerResponseDto = getCustomerResponseDto(loanClientRequest.customerNumber());
 
         // check if there is an on going loan
         checkOngoingLoan(customerResponseDto);
@@ -58,7 +51,42 @@ public class LoanServiceImpl implements LoanService {
         return loanResponseDto;
     }
 
+    public LoanResponseDto checkLoanStatus(LoanCheckStatusDto loanCheckStatusDto) {
+        CustomerResponseDto customerResponseDto = getCustomerResponseDto(loanCheckStatusDto.customerNumber());
+
+        LoanModel loan = this.loanRepository
+                .findByIdOrderByCreatedDateDesc(customerResponseDto.customerId());
+
+        if (loan == null) {
+            throw new RuntimeException("Failed to find loan");
+        }
+
+        LoanResponseDto loanResponseDto = new LoanResponseDto(
+                loan.getCustomer().getCustomerNumber(),
+                loan.getId(), loan.getAmount(),
+                loan.getStatus());
+
+        return loanResponseDto;
+    }
+
     // Private methods
+
+    private CustomerResponseDto getCustomerResponseDto(String customerNumber) {
+        CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
+        CustomerResponseDto customerResponseDto;
+
+        try {
+            customerResponseDto = customerService.getCustomer(customerSubscriptionDto);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve customer from customer service");
+        }
+
+        // check if customer exists
+        if (customerResponseDto == null) {
+            throw new RuntimeException("Customer not found");
+        }
+        return customerResponseDto;
+    }
 
     private void checkOngoingLoan(CustomerResponseDto customerResponseDto) {
         // check if customer has a pending loan request
