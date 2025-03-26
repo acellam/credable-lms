@@ -22,8 +22,6 @@ import com.acellam.lms.loans.loan.dtos.LoanClientRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
 
-import lombok.experimental.var;
-
 public class LoanServiceImplTest {
     @InjectMocks
     private LoanServiceImpl loanServiceImpl;
