@@ -18,6 +18,7 @@ import com.acellam.lms.loans.loan.LoanMapper;
 import com.acellam.lms.loans.loan.LoanModel;
 import com.acellam.lms.loans.loan.LoanRepository;
 import com.acellam.lms.loans.loan.LoanStatus;
+import com.acellam.lms.loans.loan.dtos.LoanCheckStatusDto;
 import com.acellam.lms.loans.loan.dtos.LoanClientRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
@@ -83,6 +84,52 @@ public class LoanServiceImplTest {
 
         // Then
         LoanResponseDto loanResponseDto = loanServiceImpl.createLoan(loanClientRequestDto);
+
+        // Assertions
+
+        assertNotNull(loan.getCustomer());
+        assertEquals(loan.getCustomer(), customer);
+
+        assertEquals(loanResponseDto.status(), loanStatus);
+        assertEquals(loanResponseDto.amount(), amount);
+        assertEquals(loanResponseDto.status(), loan.getStatus());
+        assertEquals(loanResponseDto.amount(), loan.getAmount());
+
+    }
+
+    @Test
+    void testCheckLoanStatus() {
+        String customerNumber = "1234";
+        Long customerId = 1L;
+        Long loanId = 1L;
+        String firstName = "John";
+        String lastName = "Doe";
+        int amount = 1000;
+        LoanStatus loanStatus = LoanStatus.APPROVED;
+
+        // Models
+        CustomerModel customer = new CustomerModel();
+        customer.setCustomerNumber(customerNumber);
+        customer.setId(customerId);
+        customer.setFristName(firstName);
+        customer.setLastName(lastName);
+
+        LoanModel loan = new LoanModel(loanId, amount, loanStatus, customer);
+
+        // DTOs
+        LoanCheckStatusDto loanCheckStatusDto = new LoanCheckStatusDto(customerNumber);
+
+        CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
+
+        CustomerResponseDto customerResponseDto = new CustomerResponseDto(
+                customerId, customerNumber, firstName, lastName);
+
+        // Mocks
+        when(customerService.getCustomer(customerSubscriptionDto)).thenReturn(customerResponseDto);
+        when(loanRepository.findByIdOrderByCreatedDateDesc(customerId)).thenReturn(loan);
+
+        // Then
+        LoanResponseDto loanResponseDto = loanServiceImpl.checkLoanStatus(loanCheckStatusDto);
 
         // Assertions
 
