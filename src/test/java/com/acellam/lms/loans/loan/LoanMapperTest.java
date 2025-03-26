@@ -1,4 +1,4 @@
-package com.acellam.lms.loan.mappers;
+package com.acellam.lms.loans.loan;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,10 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.acellam.lms.loan.dtos.Loans.LoanRequestDto;
-import com.acellam.lms.loan.dtos.Loans.LoanResponseDto;
-import com.acellam.lms.loan.models.Customer;
-import com.acellam.lms.loan.models.Loan;
+import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
+import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
+import com.acellam.lms.loans.customer.CustomerModel;
 
 public class LoanMapperTest {
     private LoanMapper loanMapper;
@@ -23,7 +22,7 @@ public class LoanMapperTest {
     void testToLoan() {
         LoanRequestDto loanRequestDto = new LoanRequestDto(1L, 1000);
 
-        Loan loan = this.loanMapper.toLoan(loanRequestDto);
+        LoanModel loan = this.loanMapper.toLoan(loanRequestDto);
 
         assertEquals(loan.getAmount(), loanRequestDto.amount());
         assertNotNull(loan.getCustomer());
@@ -33,11 +32,11 @@ public class LoanMapperTest {
 
     @Test
     void testToLoanResponseDto() {
-        Customer customer = new Customer();
+        CustomerModel customer = new CustomerModel();
         customer.setCustomerNumber("1234");
         customer.setId(1L);
 
-        Loan loan = new Loan();
+        LoanModel loan = new LoanModel();
         loan.setId(1L);
         loan.setAmount(1000);
         loan.setCustomer(customer);

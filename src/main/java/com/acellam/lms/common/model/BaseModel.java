@@ -1,4 +1,4 @@
-package com.acellam.common.model;
+package com.acellam.lms.common.model;
 
 import java.time.LocalDateTime;
 

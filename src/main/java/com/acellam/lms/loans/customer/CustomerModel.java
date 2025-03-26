@@ -1,4 +1,4 @@
-package com.acellam.lms.loan.models;
+package com.acellam.lms.loans.customer;
 
 import java.util.List;
 
@@ -14,7 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.acellam.common.model.BaseModel;
+import com.acellam.lms.common.model.BaseModel;
+import com.acellam.lms.loans.loan.LoanModel;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Getter
 @Setter
 @Table(name = "customers")
-public class Customer extends BaseModel {
+public class CustomerModel extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,5 +38,5 @@ public class Customer extends BaseModel {
 
     @OneToMany(mappedBy = "customer")
     @JsonManagedReference
-    private List<Loan> loans;
+    private List<LoanModel> loans;
 }

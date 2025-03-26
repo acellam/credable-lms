@@ -1,4 +1,4 @@
-package com.acellam.lms.loan.models;
+package com.acellam.lms.loans.loan;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.acellam.common.model.BaseModel;
+import com.acellam.lms.common.model.BaseModel;
+import com.acellam.lms.loans.customer.CustomerModel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Getter
 @Setter
 @Table(name = "loans")
-public class Loan extends BaseModel {
+public class LoanModel extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,5 +36,5 @@ public class Loan extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonBackReference
-    private Customer customer;
+    private CustomerModel customer;
 }
