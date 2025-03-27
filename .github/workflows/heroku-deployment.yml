@@ -8,16 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: main # IMPORTANT see https://github.com/AkhileshNS/heroku-deploy/issues/35
-      - name: Install Heroku CLI
+      - name: Install Heroku CLI # <- IMPORTANT!!! Make sure the cli is installed before using the action
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh 
-      - uses: akhileshns/heroku-deploy@v3.12.12 
+          curl https://cli-assets.heroku.com/install.sh | sh  
+      - uses: akhileshns/heroku-deploy@v3.14.15 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP}}
