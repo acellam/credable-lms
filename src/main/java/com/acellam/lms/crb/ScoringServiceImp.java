@@ -11,12 +11,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import lombok.extern.slf4j.Slf4j;
 
 import com.acellam.lms.config.AppConfig;
 import com.acellam.lms.config.ConfigProperties;
 import com.acellam.lms.crb.dtos.RegisterTransactionDto;
 import com.acellam.lms.crb.dtos.RegisterTransactionResponseDto;
 
+@Slf4j
 @Service
 public class ScoringServiceImp implements ScoringService {
     private final RestTemplate restTemplate;
@@ -92,9 +94,13 @@ public class ScoringServiceImp implements ScoringService {
 
         HttpEntity<String> request = new HttpEntity<String>(registerTransactionDto.toString(), headers);
 
-        this.registerTransactionResponseDto = restTemplate
-                .postForObject(endPoint,
-                        request,
-                        RegisterTransactionResponseDto.class);
+        try {
+            ResponseEntity<RegisterTransactionResponseDto> response = restTemplate.postForEntity(endPoint, request,
+                    RegisterTransactionResponseDto.class);
+
+            this.registerTransactionResponseDto = response.getBody();
+        } catch (Exception e) {
+            log.error("Failed to register transaction endpoint ", e);
+        }
     }
 }
