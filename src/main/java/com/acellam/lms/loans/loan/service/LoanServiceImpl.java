@@ -54,6 +54,9 @@ public class LoanServiceImpl implements LoanService {
             throw new RuntimeException("Customer is not eligible for loan");
         }
 
+        // set loan status to approved
+        loan.setStatus(LoanStatus.APPROVED);
+
         LoanModel savedLoan = this.loanRepository.save(loan);
 
         LoanResponseDto loanResponseDto = this.loanMapper.toLoanResponseDto(savedLoan);
