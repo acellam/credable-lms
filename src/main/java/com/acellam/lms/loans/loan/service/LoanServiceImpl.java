@@ -44,6 +44,8 @@ public class LoanServiceImpl implements LoanService {
         LoanModel loan = this.loanMapper.toLoan(loanRequestDto);
         loan.setStatus(LoanStatus.REQUESTED);
 
+        // check credit score
+
         LoanModel savedLoan = this.loanRepository.save(loan);
 
         LoanResponseDto loanResponseDto = this.loanMapper.toLoanResponseDto(savedLoan);
