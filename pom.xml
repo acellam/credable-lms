@@ -42,6 +42,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
+		<dependency>
+			 <groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.6</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -93,7 +98,6 @@
 				</configuration>
 			</plugin>
 			<!-- tag::wsdl[] -->
-
 			<plugin>
 				<groupId>com.sun.xml.ws</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
@@ -105,9 +109,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<packageName>io.credable.trxapitest.wsdl</packageName>
+					<packageName>io.credable.kycapitest.wsdl</packageName>
 					<wsdlUrls>
-						<wsdlUrl>https://trxapitest.credable.io/service/transactionWsdl.wsdl</wsdlUrl>
+						<wsdlUrl>https://kycapitest.credable.io/service/customerWsdl.wsdl</wsdlUrl>
 					</wsdlUrls>
 					<sourceDestDir>${sourcesDir}</sourceDestDir>
 					<destDir>${classesDir}</destDir>
@@ -125,9 +129,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<packageName>io.credable.kycapitest.wsdl</packageName>
+					<packageName>io.credable.trxapitest.wsdl</packageName>
 					<wsdlUrls>
-						<wsdlUrl>https://kycapitest.credable.io/service/customerWsdl.wsdl</wsdlUrl>
+						<wsdlUrl>https://trxapitest.credable.io/service/transactionWsdl.wsdl</wsdlUrl>
 					</wsdlUrls>
 					<sourceDestDir>${sourcesDir}</sourceDestDir>
 					<destDir>${classesDir}</destDir>
