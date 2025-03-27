@@ -44,8 +44,9 @@ mvn spring-boot:run
 
 ## Usage
 
-The application has the following endpoints:
+The application will be on running at `http://localhost:8080` application has the following endpoints:
 
-- POST /api/v1/subscribe - Submit loan request (customer number + amount).
-- POST /api/v1/loans - Apply for a loan (customer number + amount).
-- GET /api/v1/loans/{id} - Get loan status (pending/approved/rejected/failed)
+- POST api/v1/customers - Register for loan service
+- POST /api/v1/loans - Apply for a loan (customerNumber + amount).
+- GET /api/v1/loans - Check for loan status (customerNumber).
+- GET /api/v1/transactions - Stream transactions (customerNumber).
