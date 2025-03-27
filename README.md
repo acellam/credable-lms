@@ -50,3 +50,6 @@ The application will be on running at `http://localhost:8080` application has th
 - POST /api/v1/loans - Apply for a loan (customerNumber + amount).
 - GET /api/v1/loans - Check for loan status (customerNumber).
 - GET /api/v1/transactions - Stream transactions (customerNumber).
+
+## API Documentation
+There is a swagger documentation available at `http://localhost:8080/swagger-ui.html`
