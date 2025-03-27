@@ -2,7 +2,7 @@ package com.acellam.lms.loans.loan;
 
 import org.springframework.stereotype.Component;
 
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
 
@@ -13,7 +13,7 @@ public class LoanMapper {
 
         loan.setAmount(requestLoanDto.amount());
 
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setId(requestLoanDto.customerId());
         loan.setCustomer(customer);
 

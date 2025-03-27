@@ -20,19 +20,19 @@ public class CustomerMapperTest {
     void testToCustomer() {
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto("1234");
 
-        CustomerModel customerModel = this.customerMapper.toCustomer(customerSubscriptionDto);
+        Customer customer = this.customerMapper.toCustomer(customerSubscriptionDto);
 
-        assertEquals(customerModel.getCustomerNumber(), customerModel.getCustomerNumber());
+        assertEquals(customer.getCustomerNumber(), customer.getCustomerNumber());
     }
 
     @Test
     void testToCustomerResponseDto() {
-        CustomerModel customerModel = new CustomerModel();
-        customerModel.setCustomerNumber("1234");
-        customerModel.setId(1L);
+        Customer customer = new Customer();
+        customer.setCustomerNumber("1234");
+        customer.setId(1L);
 
-        CustomerResponseDto customerResponseDto = this.customerMapper.toCustomerResponseDto(customerModel);
+        CustomerResponseDto customerResponseDto = this.customerMapper.toCustomerResponseDto(customer);
 
-        assertEquals(customerResponseDto.customerNumber(), customerModel.getCustomerNumber());
+        assertEquals(customerResponseDto.customerNumber(), customer.getCustomerNumber());
     }
 }

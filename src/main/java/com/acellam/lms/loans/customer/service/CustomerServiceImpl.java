@@ -6,7 +6,7 @@ import com.acellam.lms.cbs.KycService;
 import com.acellam.lms.cbs.dtos.CheckKycDto;
 import com.acellam.lms.cbs.dtos.KycResponseDto;
 import com.acellam.lms.loans.customer.CustomerMapper;
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 import com.acellam.lms.loans.customer.CustomerRepository;
 import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerResponseDto getCustomer(CustomerSubscriptionDto customerSubscriptionDto) {
-        CustomerModel customerModel = customerRepository
+        Customer customerModel = customerRepository
                 .findByCustomerNumber(customerSubscriptionDto.customerNumber());
 
         if (customerModel == null) {
@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerResponseDto createCustomer(CustomerSubscriptionDto customerSubscriptionDto) {
-        CustomerModel customer = this.customerMapper.toCustomer(customerSubscriptionDto);
+        Customer customer = this.customerMapper.toCustomer(customerSubscriptionDto);
 
         KycResponseDto kycResponseDto = kycService
                 .fetchCustomerKyc(new CheckKycDto(customer.getCustomerNumber()));
@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Customer KYC is not valid");
         }
 
-        CustomerModel savedCustomer = customerRepository.save(customer);
+        Customer savedCustomer = customerRepository.save(customer);
 
         return this.customerMapper.toCustomerResponseDto(savedCustomer);
     }

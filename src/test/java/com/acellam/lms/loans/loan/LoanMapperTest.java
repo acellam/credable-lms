@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.acellam.lms.loans.loan.dtos.LoanRequestDto;
 import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 
 public class LoanMapperTest {
     private LoanMapper loanMapper;
@@ -32,7 +32,7 @@ public class LoanMapperTest {
 
     @Test
     void testToLoanResponseDto() {
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber("1234");
         customer.setId(1L);
 

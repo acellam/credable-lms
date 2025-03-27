@@ -7,20 +7,20 @@ import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 
 @Component
 public class CustomerMapper {
-    public CustomerModel toCustomer(CustomerSubscriptionDto customerSubscriptionDto) {
-        CustomerModel customerModel = new CustomerModel();
+    public Customer toCustomer(CustomerSubscriptionDto customerSubscriptionDto) {
+        Customer customer = new Customer();
 
-        customerModel.setCustomerNumber(customerSubscriptionDto.customerNumber());
+        customer.setCustomerNumber(customerSubscriptionDto.customerNumber());
 
-        return customerModel;
+        return customer;
     }
 
-    public CustomerResponseDto toCustomerResponseDto(CustomerModel customerModel) {
+    public CustomerResponseDto toCustomerResponseDto(Customer customer) {
         return CustomerResponseDto
                 .builder()
-                .firstName(customerModel.getFristName())
-                .lastName(customerModel.getLastName())
-                .customerNumber(customerModel.getCustomerNumber())
+                .firstName(customer.getFristName())
+                .lastName(customer.getLastName())
+                .customerNumber(customer.getCustomerNumber())
                 .build();
     }
 }

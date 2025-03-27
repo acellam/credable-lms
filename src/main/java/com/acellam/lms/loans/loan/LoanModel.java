@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.acellam.lms.common.model.BaseModel;
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -39,5 +39,5 @@ public class LoanModel extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonBackReference
-    private CustomerModel customer;
+    private Customer customer;
 }

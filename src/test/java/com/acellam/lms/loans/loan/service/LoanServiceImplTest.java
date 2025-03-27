@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.acellam.lms.crb.ScoringService;
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 import com.acellam.lms.loans.customer.service.CustomerService;
@@ -55,7 +55,7 @@ public class LoanServiceImplTest {
         LoanStatus loanStatus = LoanStatus.REQUESTED;
 
         // Models
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);
@@ -115,7 +115,7 @@ public class LoanServiceImplTest {
         LoanStatus loanStatus = LoanStatus.APPROVED;
 
         // Models
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);
@@ -161,7 +161,7 @@ public class LoanServiceImplTest {
         LoanStatus loanStatus = LoanStatus.REQUESTED;
 
         // Models
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);

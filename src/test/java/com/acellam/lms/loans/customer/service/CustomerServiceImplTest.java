@@ -14,7 +14,7 @@ import com.acellam.lms.cbs.KycServiceImpl;
 import com.acellam.lms.cbs.dtos.CheckKycDto;
 import com.acellam.lms.cbs.dtos.KycResponseDto;
 import com.acellam.lms.loans.customer.CustomerMapper;
-import com.acellam.lms.loans.customer.CustomerModel;
+import com.acellam.lms.loans.customer.Customer;
 import com.acellam.lms.loans.customer.CustomerRepository;
 import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
@@ -45,7 +45,7 @@ public class CustomerServiceImplTest {
 
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
 
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);
@@ -82,7 +82,7 @@ public class CustomerServiceImplTest {
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
         CheckKycDto checkKycDto = new CheckKycDto(customerNumber);
 
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);
@@ -122,7 +122,7 @@ public class CustomerServiceImplTest {
         var firstName = "John";
         var lastName = "Doe";
 
-        CustomerModel customer = new CustomerModel();
+        Customer customer = new Customer();
         customer.setCustomerNumber(customerNumber);
         customer.setId(customerId);
         customer.setFristName(firstName);
