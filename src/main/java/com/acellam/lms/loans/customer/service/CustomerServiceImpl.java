@@ -1,6 +1,6 @@
 package com.acellam.lms.loans.customer.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.acellam.lms.cbs.KycService;
 import com.acellam.lms.cbs.dtos.CheckKycDto;
@@ -11,7 +11,7 @@ import com.acellam.lms.loans.customer.CustomerRepository;
 import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 
-@Component
+@Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
