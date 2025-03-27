@@ -1,4 +1,4 @@
-package com.acellam.lms.cbs;
+package com.acellam.lms.cbs.soap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

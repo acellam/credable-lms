@@ -7,6 +7,7 @@ import io.credable.kycapitest.wsdl.CustomerResponse;
 
 import com.acellam.lms.cbs.dtos.CheckKycDto;
 import com.acellam.lms.cbs.dtos.KycResponseDto;
+import com.acellam.lms.cbs.soap.KycClient;
 
 @Service
 public class KycServiceImpl implements KycService {
