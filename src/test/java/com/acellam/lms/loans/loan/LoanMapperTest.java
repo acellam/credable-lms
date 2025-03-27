@@ -22,7 +22,7 @@ public class LoanMapperTest {
     void testToLoan() {
         LoanRequestDto loanRequestDto = new LoanRequestDto(1L, 1000);
 
-        LoanModel loan = this.loanMapper.toLoan(loanRequestDto);
+        Loan loan = this.loanMapper.toLoan(loanRequestDto);
 
         assertEquals(loan.getAmount(), loanRequestDto.amount());
         assertNotNull(loan.getCustomer());
@@ -36,7 +36,7 @@ public class LoanMapperTest {
         customer.setCustomerNumber("1234");
         customer.setId(1L);
 
-        LoanModel loan = new LoanModel();
+        Loan loan = new Loan();
         loan.setId(1L);
         loan.setAmount(1000);
         loan.setCustomer(customer);

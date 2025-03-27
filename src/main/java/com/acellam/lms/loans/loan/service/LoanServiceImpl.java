@@ -7,7 +7,7 @@ import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 import com.acellam.lms.loans.customer.service.CustomerService;
 import com.acellam.lms.loans.loan.LoanMapper;
-import com.acellam.lms.loans.loan.LoanModel;
+import com.acellam.lms.loans.loan.Loan;
 import com.acellam.lms.loans.loan.LoanRepository;
 import com.acellam.lms.loans.loan.LoanStatus;
 import com.acellam.lms.loans.loan.dtos.LoanCheckStatusDto;
@@ -44,7 +44,7 @@ public class LoanServiceImpl implements LoanService {
                 .amount(loanClientRequest.amount())
                 .build();
 
-        LoanModel loan = this.loanMapper.toLoan(loanRequestDto);
+        Loan loan = this.loanMapper.toLoan(loanRequestDto);
         loan.setStatus(LoanStatus.REQUESTED);
 
         // check credit score
@@ -57,7 +57,7 @@ public class LoanServiceImpl implements LoanService {
         // set loan status to approved
         loan.setStatus(LoanStatus.APPROVED);
 
-        LoanModel savedLoan = this.loanRepository.save(loan);
+        Loan savedLoan = this.loanRepository.save(loan);
 
         LoanResponseDto loanResponseDto = this.loanMapper.toLoanResponseDto(savedLoan);
 
@@ -67,7 +67,7 @@ public class LoanServiceImpl implements LoanService {
     public LoanResponseDto checkLoanStatus(LoanCheckStatusDto loanCheckStatusDto) {
         CustomerResponseDto customerResponseDto = getCustomerResponseDto(loanCheckStatusDto.customerNumber());
 
-        LoanModel loan = this.loanRepository
+        Loan loan = this.loanRepository
                 .findByIdOrderByCreatedDateDesc(customerResponseDto.customerId());
 
         if (loan == null) {

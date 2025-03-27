@@ -17,7 +17,7 @@ import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 import com.acellam.lms.loans.customer.service.CustomerService;
 import com.acellam.lms.loans.loan.LoanMapper;
-import com.acellam.lms.loans.loan.LoanModel;
+import com.acellam.lms.loans.loan.Loan;
 import com.acellam.lms.loans.loan.LoanRepository;
 import com.acellam.lms.loans.loan.LoanStatus;
 import com.acellam.lms.loans.loan.dtos.LoanCheckStatusDto;
@@ -61,7 +61,7 @@ public class LoanServiceImplTest {
         customer.setFristName(firstName);
         customer.setLastName(lastName);
 
-        LoanModel loan = new LoanModel(loanId, amount, loanStatus, customer);
+        Loan loan = new Loan(loanId, amount, loanStatus, customer);
 
         // DTOs
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
@@ -121,7 +121,7 @@ public class LoanServiceImplTest {
         customer.setFristName(firstName);
         customer.setLastName(lastName);
 
-        LoanModel loan = new LoanModel(loanId, amount, loanStatus, customer);
+        Loan loan = new Loan(loanId, amount, loanStatus, customer);
 
         // DTOs
         LoanCheckStatusDto loanCheckStatusDto = new LoanCheckStatusDto(customerNumber);
@@ -167,7 +167,7 @@ public class LoanServiceImplTest {
         customer.setFristName(firstName);
         customer.setLastName(lastName);
 
-        LoanModel loan = new LoanModel(loanId, amount, loanStatus, customer);
+        Loan loan = new Loan(loanId, amount, loanStatus, customer);
 
         // DTOs
         CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);

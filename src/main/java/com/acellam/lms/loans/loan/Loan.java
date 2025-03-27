@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Getter
 @Setter
 @Table(name = "loans")
-public class LoanModel extends BaseModel {
+public class Loan extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

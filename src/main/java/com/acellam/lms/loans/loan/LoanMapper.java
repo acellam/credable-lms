@@ -8,8 +8,8 @@ import com.acellam.lms.loans.loan.dtos.LoanResponseDto;
 
 @Component
 public class LoanMapper {
-    public LoanModel toLoan(LoanRequestDto requestLoanDto) {
-        LoanModel loan = new LoanModel();
+    public Loan toLoan(LoanRequestDto requestLoanDto) {
+        Loan loan = new Loan();
 
         loan.setAmount(requestLoanDto.amount());
 
@@ -20,7 +20,7 @@ public class LoanMapper {
         return loan;
     }
 
-    public LoanResponseDto toLoanResponseDto(LoanModel loan) {
+    public LoanResponseDto toLoanResponseDto(Loan loan) {
         return LoanResponseDto
                 .builder()
                 .id(loan.getId())

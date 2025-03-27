@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.acellam.lms.common.model.BaseModel;
-import com.acellam.lms.loans.loan.LoanModel;
+import com.acellam.lms.loans.loan.Loan;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -38,5 +38,5 @@ public class Customer extends BaseModel {
 
     @OneToMany(mappedBy = "customer")
     @JsonManagedReference
-    private List<LoanModel> loans;
+    private List<Loan> loans;
 }
