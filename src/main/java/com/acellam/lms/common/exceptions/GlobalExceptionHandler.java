@@ -71,4 +71,14 @@ public class GlobalExceptionHandler {
                 .errorMsg("Provide a valid request body")
                 .build();
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExceptionResponse handleRuntimeException(Exception exp) {
+        log.error("Error occurred: ", exp);
+        return ExceptionResponse
+                .builder()
+                .errorMsg(exp.getMessage())
+                .build();
+    }
 }
