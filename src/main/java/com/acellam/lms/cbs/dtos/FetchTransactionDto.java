@@ -1,5 +1,8 @@
 package com.acellam.lms.cbs.dtos;
 
-public record FetchTransactionDto(String customerNumber) {
+import jakarta.validation.constraints.NotEmpty;
+
+public record FetchTransactionDto(
+        @NotEmpty(message = "Customer number is required") String customerNumber) {
 
 }
