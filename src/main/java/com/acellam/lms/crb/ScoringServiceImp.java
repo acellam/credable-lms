@@ -30,12 +30,14 @@ public class ScoringServiceImp implements ScoringService {
         this.appConfig = appConfig;
         this.restTemplate = restTemplate;
         this.config = config;
-
-        registerTransactionEndPoint();
     }
 
     @Override
     public boolean isEligibleForLoan(String customerNumber) {
+        if (this.registerTransactionResponseDto == null) {
+            registerTransactionEndPoint();
+        }
+
         String initiateUrl = this.config.getInitiateQueryScoreUrl() + customerNumber;
         String queryUrl = this.config.getQueryScoreUrl() + customerNumber;
 
