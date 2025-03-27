@@ -2,6 +2,7 @@ package com.acellam.lms.loans.loan.service;
 
 import org.springframework.stereotype.Service;
 
+import com.acellam.lms.crb.ScoringService;
 import com.acellam.lms.loans.customer.dtos.CustomerResponseDto;
 import com.acellam.lms.loans.customer.dtos.CustomerSubscriptionDto;
 import com.acellam.lms.loans.customer.service.CustomerService;
@@ -20,10 +21,12 @@ public class LoanServiceImpl implements LoanService {
     private final LoanRepository loanRepository;
     private final CustomerService customerService;
     private final LoanMapper loanMapper;
+    private final ScoringService scoringService;
 
     public LoanServiceImpl(
-            LoanRepository loanRepository, CustomerService customerService, LoanMapper loanMapper) {
-
+            LoanRepository loanRepository,
+            CustomerService customerService, LoanMapper loanMapper, ScoringService scoringService) {
+        this.scoringService = scoringService;
         this.loanMapper = loanMapper;
         this.customerService = customerService;
         this.loanRepository = loanRepository;
@@ -45,6 +48,11 @@ public class LoanServiceImpl implements LoanService {
         loan.setStatus(LoanStatus.REQUESTED);
 
         // check credit score
+        boolean isEligible = this.scoringService.isEligibleForLoan(customerResponseDto.customerNumber());
+
+        if (!isEligible) {
+            throw new RuntimeException("Customer is not eligible for loan");
+        }
 
         LoanModel savedLoan = this.loanRepository.save(loan);
 
