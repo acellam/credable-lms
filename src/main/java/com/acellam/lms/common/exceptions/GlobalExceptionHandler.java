@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -58,6 +59,16 @@ public class GlobalExceptionHandler {
         return ExceptionResponse
                 .builder()
                 .errorMsg("Oops 👩‍🚒, error on our side. Kindly contact the admin")
+                .build();
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handleHttpMessageNotReadableException(Exception exp) {
+        log.error("Error occurred: ", exp);
+        return ExceptionResponse
+                .builder()
+                .errorMsg("Provide a valid request body")
                 .build();
     }
 }
