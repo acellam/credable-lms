@@ -30,6 +30,10 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerModel customerModel = customerRepository
                 .findByCustomerNumber(customerSubscriptionDto.customerNumber());
 
+        if (customerModel == null) {
+            throw new RuntimeException("Failed to retrieve customer");
+        }
+
         return this.customerMapper.toCustomerResponseDto(customerModel);
     }
 

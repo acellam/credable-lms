@@ -143,4 +143,16 @@ public class CustomerServiceImplTest {
         assertEquals("Customer KYC is not valid", exception.getMessage());
 
     }
+
+    @Test
+    void testFailedToGetCustomer() {
+        var customerNumber = "1234";
+
+        CustomerSubscriptionDto customerSubscriptionDto = new CustomerSubscriptionDto(customerNumber);
+
+        var exception = assertThrows(RuntimeException.class,
+                () -> this.customerServiceImpl.getCustomer(customerSubscriptionDto));
+
+        assertEquals("Failed to retrieve customer", exception.getMessage());
+    }
 }
